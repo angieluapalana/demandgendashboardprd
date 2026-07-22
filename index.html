@@ -3,492 +3,410 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Demand Generation Dashboard — Rebuild PRD | Coldwell Energy</title>
+<title>Coldwell Energy — Marketing Performance Dashboard · Build Plan</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
     --paper:#FAFAF7;
-    --panel:#FFFFFF;
-    --ink:#26282B;
-    --ink-soft:#5C6066;
-    --amber:#E8A200;
-    --amber-deep:#B37E00;
-    --amber-tint:#FCF3DA;
-    --line:#E6E4DD;
-    --line-soft:#EFEDE7;
-    --good:#2E7D4F;
+    --card:#FFFFFF;
+    --ink:#16222E;
+    --ink-soft:#4A5866;
+    --line:#E4E4DC;
+    --amber:#C9860F;
+    --amber-soft:#FBF3E2;
+    --teal:#155E63;
+    --teal-soft:#E7F1F0;
+    --good:#2E7D5B;
+    --maxw:980px;
   }
-  *{margin:0;padding:0;box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
   body{
     background:var(--paper);
     color:var(--ink);
-    font-family:'Inter',-apple-system,'Segoe UI',Arial,sans-serif;
-    font-size:16px;line-height:1.65;
+    font-family:'DM Sans',sans-serif;
+    font-size:16.5px;
+    line-height:1.65;
     -webkit-font-smoothing:antialiased;
   }
-  .wrap{max-width:1160px;margin:0 auto;padding:0 28px;}
+  h1,h2,h3,h4{font-family:'Manrope',sans-serif;line-height:1.2}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+#preview .wrap{max-width:1360px}
+/* Wider than the rest of the page on purpose: the embedded dashboard needs
+   real desktop width to render its actual 6-across layout rather than
+   tripping its own tablet/mobile breakpoints inside a narrower frame. */
 
-  /* ---------- Header ---------- */
-  header{border-bottom:1px solid var(--line);padding:56px 0 40px;}
-  .brandline{
-    display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;
-    font-family:'Inter',sans-serif;font-weight:600;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);
-    margin-bottom:34px;
-  }
-  .brandline .dot{color:var(--amber);}
-  h1{
-    font-family:'Manrope',sans-serif;font-weight:800;
-    font-size:clamp(30px,4.6vw,44px);line-height:1.12;letter-spacing:-.015em;
-    max-width:18ch;
-  }
-  h1 .accent{color:var(--amber-deep);}
-  .meta{
-    margin-top:28px;display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
-    gap:0;border:1px solid var(--line);background:var(--panel);border-radius:10px;overflow:hidden;
-  }
-  .meta div{padding:14px 18px;border-right:1px solid var(--line-soft);}
-  .meta div:last-child{border-right:none;}
-  .meta .k{font-family:'Inter',sans-serif;font-weight:600;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);display:block;margin-bottom:3px;}
-  .meta .v{font-weight:700;font-family:'Manrope',sans-serif;font-size:14.5px;}
+  /* ---------- header ---------- */
+  header{border-bottom:1px solid var(--line);background:var(--card)}
+  .head-inner{display:flex;justify-content:space-between;align-items:center;padding:18px 0}
+  .brand{font-family:'Manrope',sans-serif;font-weight:800;font-size:15px;letter-spacing:.04em}
+  .brand span{color:var(--amber)}
+  .doc-tag{font-family:'DM Mono',monospace;font-size:12px;color:var(--ink-soft);letter-spacing:.06em}
 
-  /* ---------- Layout: sidebar + content ---------- */
-  .layout{display:grid;grid-template-columns:230px minmax(0,1fr);gap:44px;align-items:start;}
-  aside.toc{
-    position:sticky;top:24px;
-    padding:18px 0 18px;
-  }
-  .toc .toc-title{
-    font-family:'Inter',sans-serif;font-weight:600;font-size:11px;letter-spacing:.16em;text-transform:uppercase;
-    color:var(--ink-soft);margin-bottom:12px;padding-left:14px;
-  }
-  .toc a{
-    display:block;text-decoration:none;color:var(--ink-soft);
-    font-size:14px;font-weight:500;line-height:1.4;
-    padding:7px 14px;border-left:2px solid var(--line);
-    transition:color .15s,border-color .15s,background .15s;
-  }
-  .toc a .n{font-family:'Inter',sans-serif;font-weight:600;font-size:11px;color:var(--amber-deep);margin-right:8px;}
-  .toc a:hover{color:var(--ink);background:var(--panel);}
-  .toc a.active{
-    color:var(--ink);font-weight:600;border-left-color:var(--amber);
-    background:var(--amber-tint);
-  }
-  @media (max-width:900px){
-    .layout{grid-template-columns:1fr;gap:0;}
-    aside.toc{position:static;border:1px solid var(--line);background:var(--panel);border-radius:10px;margin:28px 0 6px;padding:16px 6px;}
-  }
+  /* ---------- hero ---------- */
+  .hero{padding:72px 0 56px}
+  .eyebrow{font-family:'DM Mono',monospace;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);margin-bottom:18px}
+  .hero h1{font-size:clamp(32px,5vw,50px);font-weight:800;letter-spacing:-.02em;max-width:19ch}
+  .hero p.lede{margin-top:22px;font-size:19px;color:var(--ink-soft);max-width:58ch}
+  .meta-strip{display:flex;flex-wrap:wrap;gap:10px;margin-top:32px}
+  .chip{font-family:'DM Mono',monospace;font-size:12.5px;padding:7px 14px;border:1px solid var(--line);border-radius:999px;background:var(--card);color:var(--ink-soft)}
+  .chip strong{color:var(--ink);font-weight:500}
+  .chip.hl{border-color:var(--amber);background:var(--amber-soft);color:var(--ink)}
 
-  /* ---------- Sections ---------- */
-  section{padding:44px 0 8px;scroll-margin-top:18px;}
-  .eyebrow{
-    display:flex;align-items:center;gap:12px;margin-bottom:14px;
-    font-family:'Inter',sans-serif;font-weight:600;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--amber-deep);
-  }
-  .eyebrow::after{content:"";flex:1;height:1px;background:var(--line);}
-  h2{font-family:'Manrope',sans-serif;font-weight:800;font-size:24px;letter-spacing:-.01em;margin-bottom:14px;}
-  h3{font-family:'Manrope',sans-serif;font-weight:700;font-size:17px;margin:26px 0 10px;}
-  p{margin-bottom:14px;max-width:72ch;}
-  strong{font-weight:700;}
-  .note{
-    background:var(--amber-tint);border-left:3px solid var(--amber);
-    padding:14px 18px;border-radius:0 8px 8px 0;margin:18px 0;max-width:72ch;
-  }
-  .note p{margin:0;}
+  /* ---------- sections ---------- */
+  section{padding:60px 0;border-top:1px solid var(--line)}
+  .sec-label{font-family:'DM Mono',monospace;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin-bottom:12px}
+  section h2{font-size:clamp(24px,3.4vw,32px);font-weight:800;letter-spacing:-.01em;margin-bottom:14px}
+  .sec-intro{color:var(--ink-soft);max-width:64ch;margin-bottom:36px}
 
-  /* ---------- Tables ---------- */
-  table{width:100%;border-collapse:collapse;margin:16px 0 26px;background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden;font-size:16px;}
-  .tscroll{overflow-x:auto;}
-  th{
-    text-align:left;font-family:'Manrope',sans-serif;font-weight:700;font-size:12.5px;
-    letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);
-    padding:12px 16px;border-bottom:2px solid var(--amber);background:#FFFDF6;
+  /* ---------- dashboard preview mock ---------- */
+  .mock{
+    background:var(--card);border:1px solid var(--line);border-radius:14px;
+    box-shadow:0 24px 60px -30px rgba(22,34,46,.18);
+    overflow:hidden;
   }
-  td{padding:12px 16px;border-bottom:1px solid var(--line-soft);vertical-align:top;}
-  tr:last-child td{border-bottom:none;}
-  td .chip{
-    font-family:'Inter',sans-serif;font-weight:600;font-size:11.5px;background:var(--amber-tint);color:var(--amber-deep);
-    padding:2px 8px;border-radius:99px;white-space:nowrap;
-  }
-  .num{font-family:'Inter',sans-serif;font-weight:600;font-size:16px;white-space:nowrap;}
-  .new-tag{
-    display:inline-block;font-family:'Inter',sans-serif;font-weight:600;font-size:10.5px;letter-spacing:.1em;
-    background:var(--ink);color:#fff;padding:2px 8px;border-radius:4px;margin-right:6px;vertical-align:middle;
-  }
+  .mock-bar{display:flex;align-items:center;gap:8px;padding:12px 18px;border-bottom:1px solid var(--line);background:#FCFCFA}
+  .dot{width:9px;height:9px;border-radius:50%;background:var(--line)}
+  .mock-title{margin-left:8px;font-family:'DM Mono',monospace;font-size:11.5px;color:var(--ink-soft)}
+  .mock-body{padding:22px;display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
+  .panel{background:#FBFBF8;border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+  .panel .p-label{font-family:'DM Mono',monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft)}
+  .panel .p-val{font-family:'Manrope',sans-serif;font-weight:800;font-size:24px;margin-top:6px}
+  .panel .p-sub{font-size:12px;color:var(--good);margin-top:2px}
+  .kpi{grid-column:span 3}
+  .kpi2{grid-column:span 2}
+  .kpi2 .p-val{font-size:20px}
+  .kpi2 .p-sub{color:var(--ink-soft)}
+  .kpi2 .p-sub.up{color:var(--good)}
+  .kpi2 .p-sub.down{color:#B4552D}
+  .wide{grid-column:span 8;min-height:150px}
+  .side{grid-column:span 4;min-height:150px}
+  .half{grid-column:span 6;min-height:130px}
+  .full{grid-column:span 12}
+  .bars{display:flex;align-items:flex-end;gap:7px;height:78px;margin-top:14px}
+  .bars i{flex:1;background:var(--teal);opacity:.85;border-radius:3px 3px 0 0}
+  .bars i:nth-child(2n){background:var(--amber)}
+  .funnel-row{display:flex;align-items:center;gap:10px;margin-top:10px}
+  .funnel-row .f-bar{height:16px;border-radius:4px;background:var(--teal)}
+  .funnel-row .f-txt{font-family:'DM Mono',monospace;font-size:11px;color:var(--ink-soft);white-space:nowrap}
+  .map-stub{margin-top:12px;height:78px;border-radius:8px;background:
+    radial-gradient(circle at 24% 40%, var(--teal-soft) 0 14%, transparent 15%),
+    radial-gradient(circle at 46% 62%, var(--amber-soft) 0 11%, transparent 12%),
+    radial-gradient(circle at 66% 34%, var(--teal-soft) 0 9%, transparent 10%),
+    radial-gradient(circle at 82% 58%, var(--amber-soft) 0 7%, transparent 8%),
+    linear-gradient(#F4F4EF,#F4F4EF)}
+  .ai-panel{background:linear-gradient(135deg,#FFFDF7,#FBF3E2);border:1px solid #EAD9AE}
+  .ai-panel .p-label{color:var(--amber)}
+  .ai-text{font-size:13.5px;color:var(--ink);margin-top:10px;max-width:72ch}
+  .caption{font-size:13px;color:var(--ink-soft);margin-top:14px;text-align:center}
 
-  /* ---------- Pipeline diagram ---------- */
-  .pipe{margin:26px 0 30px;}
-  .pipe-row{display:flex;align-items:stretch;gap:0;flex-wrap:wrap;}
-  .pipe-node{
-    background:var(--panel);border:1px solid var(--line);border-radius:10px;
-    padding:14px 18px;min-width:150px;flex:1;
-  }
-  .pipe-node .t{font-family:'Manrope',sans-serif;font-weight:800;font-size:14px;}
-  .pipe-node .s{font-size:12.5px;color:var(--ink-soft);margin-top:2px;line-height:1.45;}
-  .pipe-node.src{border-top:3px solid var(--amber);}
-  .pipe-node.dest{border-top:3px solid var(--ink);}
-  .pipe-arrow{
-    align-self:center;padding:0 10px;color:var(--amber-deep);
-    font-family:'Inter',sans-serif;font-weight:600;font-size:18px;user-select:none;
-  }
-  .pipe-stack{display:flex;flex-direction:column;gap:10px;flex:1;}
-  @media (max-width:700px){
-    .pipe-row{flex-direction:column;}
-    .pipe-arrow{align-self:flex-start;transform:rotate(90deg);padding:2px 0 2px 18px;}
-  }
-  .asof{
-    display:inline-flex;align-items:center;gap:8px;margin-top:6px;
-    font-family:'Inter',sans-serif;font-weight:600;font-size:12px;color:var(--ink-soft);
-    border:1px dashed var(--line);border-radius:99px;padding:5px 12px;background:var(--panel);
-  }
-  .asof::before{content:"";width:8px;height:8px;border-radius:99px;background:var(--good);}
+.live-embed{position:relative;background:#fff;padding-right:46px}
+.live-embed iframe{display:block;width:100%;height:2700px;border:0;background:#FAFAF7}
+.hotspot{position:absolute;right:9px;width:26px;height:26px;border-radius:50%;border:2px solid #fff;
+  background:var(--teal);color:#fff;font-family:'Manrope',sans-serif;font-weight:800;font-size:13px;
+  display:flex;align-items:center;justify-content:center;cursor:help;z-index:5;
+  box-shadow:0 4px 10px -2px rgba(22,34,46,.3);transition:background .15s ease}
+.hotspot:hover,.hotspot:focus-visible{background:var(--amber);outline:none}
+.hotspot .htip{position:absolute;right:36px;top:50%;transform:translateY(-50%);width:250px;
+  background:var(--ink);color:#fff;font-family:'DM Sans',sans-serif;font-size:12.5px;line-height:1.5;
+  padding:11px 13px;border-radius:9px;opacity:0;pointer-events:none;transition:opacity .15s ease;
+  box-shadow:0 14px 30px -10px rgba(0,0,0,.45);text-align:left}
+.hotspot:hover .htip,.hotspot:focus-visible .htip{opacity:1}
+.hotspot .htip::after{content:"";position:absolute;left:100%;top:50%;transform:translateY(-50%);
+  border:6px solid transparent;border-left-color:var(--ink)}
+@media (max-width:760px){
+  .live-embed{padding-right:38px}
+  .hotspot{width:22px;height:22px;font-size:11px}
+  .hotspot .htip{width:190px;font-size:11.5px}
+}
 
-  /* ---------- Phases ---------- */
-  .phase{display:flex;gap:18px;padding:18px 0;border-bottom:1px solid var(--line-soft);max-width:76ch;}
-  .phase:last-of-type{border-bottom:none;}
-  .phase .ph{
-    font-family:'Inter',sans-serif;font-weight:600;font-size:12px;color:var(--amber-deep);
-    min-width:82px;padding-top:3px;letter-spacing:.06em;
-  }
-  .phase h4{font-family:'Manrope',sans-serif;font-weight:800;font-size:15.5px;margin-bottom:4px;}
-  .phase p{margin-bottom:6px;}
-  .phase ul{margin:2px 0 4px 18px;}
-  .phase li{margin-bottom:4px;}
-  .gate{font-family:'Inter',sans-serif;font-weight:600;font-size:12px;color:var(--amber-deep);}
+  /* ---------- flow diagram (signature) ---------- */
+  .flow{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:38px 30px}
+  .flow svg{width:100%;height:auto;display:block}
+  .flow text{font-family:'DM Sans',sans-serif}
+  .flow .node-title{font-family:'Manrope',sans-serif;font-weight:700;font-size:13px;fill:var(--ink)}
+  .flow .node-sub{font-family:'DM Mono',monospace;font-size:9px;fill:var(--ink-soft)}
+  .flow .lane{stroke:var(--line);stroke-width:2;fill:none}
+  .flow .pulse{stroke:var(--amber);stroke-width:2;fill:none;stroke-dasharray:6 84;animation:flowdash 3.2s linear infinite}
+  .flow .pulse.t{stroke:var(--teal)}
+  @keyframes flowdash{to{stroke-dashoffset:-90}}
+  @media (prefers-reduced-motion: reduce){.flow .pulse{animation:none;stroke-dasharray:none;opacity:.35}}
+  .flow-legend{display:flex;flex-wrap:wrap;gap:18px;margin-top:22px;justify-content:center}
+  .flow-legend span{font-family:'DM Mono',monospace;font-size:12px;color:var(--ink-soft)}
+  .flow-legend b{color:var(--ink);font-weight:500}
 
-  ul.plain{margin:6px 0 16px 20px;max-width:72ch;}
-  ul.plain li{margin-bottom:7px;}
+  /* ---------- metric table ---------- */
+  table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  th,td{text-align:left;padding:13px 18px;border-bottom:1px solid var(--line);font-size:15px;vertical-align:top}
+  th{font-family:'Manrope',sans-serif;font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);background:#FCFCFA;font-weight:700}
+  tr:last-child td{border-bottom:none}
+  td .src{font-family:'DM Mono',monospace;font-size:12px;color:var(--teal)}
 
-  /* ---------- Back to top ---------- */
-  #backTop{
-    position:fixed;right:24px;bottom:24px;z-index:50;
-    width:46px;height:46px;border-radius:12px;border:1px solid var(--line);
-    background:var(--panel);color:var(--amber-deep);cursor:pointer;
-    font-size:18px;line-height:1;display:flex;align-items:center;justify-content:center;
-    box-shadow:0 4px 14px rgba(38,40,43,.10);
-    opacity:0;transform:translateY(8px);pointer-events:none;
-    transition:opacity .2s,transform .2s,background .15s;
-  }
-  #backTop.show{opacity:1;transform:translateY(0);pointer-events:auto;}
-  #backTop:hover{background:var(--amber-tint);}
-  #backTop:focus-visible{outline:2px solid var(--amber);outline-offset:2px;}
-  @media (prefers-reduced-motion:reduce){
-    html{scroll-behavior:auto;}
-    #backTop{transition:none;}
-  }
+  /* ---------- timeline ---------- */
+  .phases{display:grid;gap:0;border-left:2px solid var(--line);margin-left:8px}
+  .phase{position:relative;padding:0 0 34px 34px}
+  .phase:last-child{padding-bottom:6px}
+  .phase::before{content:"";position:absolute;left:-8px;top:5px;width:14px;height:14px;border-radius:50%;background:var(--card);border:3px solid var(--teal)}
+  .phase.p0::before{border-color:var(--amber)}
+  .phase.done::before{background:var(--teal);border-color:var(--teal)}
+  .phase.done::after{content:"\2713";position:absolute;left:-6.5px;top:4.5px;font-size:10px;line-height:1;color:#fff;font-weight:800}
+  .phase.current::before{border-color:var(--amber);box-shadow:0 0 0 4px var(--amber-soft)}
+  .status-badge{display:inline-block;font-family:'DM Mono',monospace;font-size:11px;font-weight:600;padding:2px 10px;border-radius:999px;margin-left:10px;vertical-align:middle}
+  .status-badge.done{background:var(--teal-soft);color:var(--teal)}
+  .status-badge.current{background:var(--amber-soft);color:var(--amber)}
+  .phase h3{font-size:18px;font-weight:800}
+  .phase .who{font-family:'DM Mono',monospace;font-size:12px;color:var(--amber);margin:4px 0 8px}
+  .phase p{color:var(--ink-soft);max-width:62ch;font-size:15.5px}
 
-  /* ---------- Footer ---------- */
-  footer{
-    margin-top:56px;border-top:2px solid var(--amber);padding:26px 0 60px;
-  }
-  footer .made{font-family:'Manrope',sans-serif;font-weight:800;font-size:15px;}
-  footer .made span{color:var(--amber-deep);}
-  footer .date{font-family:'Inter',sans-serif;font-weight:600;font-size:12px;color:var(--ink-soft);letter-spacing:.08em;}
+  /* ---------- needs / guardrails cards ---------- */
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .need{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px 24px}
+  .need h4{font-size:16px;font-weight:800;margin-bottom:8px}
+  .need p{font-size:14.5px;color:var(--ink-soft)}
+  .need.accent{border-top:3px solid var(--amber)}
+  .need.tealcard{border-top:3px solid var(--teal)}
 
-  @media print{
-    body{background:#fff;}
-    header{padding-top:24px;}
-    aside.toc,#backTop{display:none;}
-    .layout{grid-template-columns:1fr;}
+  footer{border-top:1px solid var(--line);padding:34px 0 60px;color:var(--ink-soft);font-size:14px}
+  footer .foot-inner{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+
+  @media (max-width:760px){
+    .mock-body{grid-template-columns:repeat(6,1fr)}
+    .kpi{grid-column:span 3}
+    .kpi2{grid-column:span 3}
+    .wide,.side,.half{grid-column:span 6}
+    .grid2{grid-template-columns:1fr}
+    .hero{padding:52px 0 40px}
   }
 </style>
 </head>
 <body>
 
 <header>
-  <div class="wrap">
-    <div class="brandline">
-      <span>Rogers Hollow <span class="dot">●</span> Coldwell Energy</span>
-      <span>Project Requirements Document</span>
-    </div>
-    <h1>Demand Generation Dashboard<br><span class="accent">Data Layer Rebuild</span></h1>
-    <div class="meta">
-      <div><span class="k">Prepared for</span><span class="v">Tiffany — Coldwell Energy</span></div>
-      <div><span class="k">Prepared by</span><span class="v">Rogers Hollow</span></div>
-      <div><span class="k">Status</span><span class="v">For review</span></div>
-      <div><span class="k">Date</span><span class="v">July 3, 2026</span></div>
-    </div>
+  <div class="wrap head-inner">
+    <div class="brand">COLDWELL <span>ENERGY</span> × ROGERS HOLLOW</div>
+    <div class="doc-tag">BUILD PLAN · JULY 2026</div>
   </div>
 </header>
 
-<div class="wrap layout">
+<main>
 
-  <aside class="toc" id="toc">
-    <div class="toc-title">Contents</div>
-    <a href="#problem"><span class="n">01</span>The Problem</a>
-    <a href="#refreshes"><span class="n">02</span>How Refreshes Work</a>
-    <a href="#goals"><span class="n">03</span>Goals &amp; Success Criteria</a>
-    <a href="#spec"><span class="n">04</span>Dashboard Specification</a>
-    <a href="#architecture"><span class="n">05</span>Architecture</a>
-    <a href="#zapier"><span class="n">06</span>Zapier Subscription</a>
-    <a href="#evaluation"><span class="n">07</span>Under Evaluation</a>
-    <a href="#risks"><span class="n">08</span>Constraints &amp; Risks</a>
-    <a href="#continuity"><span class="n">09</span>Continuity &amp; Maintenance</a>
-    <a href="#plan"><span class="n">10</span>Build Plan</a>
-    <a href="#decisions"><span class="n">11</span>Decisions on Record</a>
-  </aside>
+  <!-- HERO -->
+  <div class="wrap hero">
+    <div class="eyebrow">Project proposal — for review &amp; approval</div>
+    <h1>One dashboard for every marketing number that matters.</h1>
+    <p class="lede">A live performance dashboard embedded directly inside your GoHighLevel workspace — ads, landing pages, leads, and pipeline in one view, refreshed automatically every morning before the team logs in, with a daily AI analysis of what changed and what to do about it.</p>
+    <div class="meta-strip">
+      <span class="chip">Prepared for <strong>Tiffany &amp; the Coldwell Energy team</strong></span>
+      <span class="chip">Refreshes <strong>daily · ready by 6:00 AM ET</strong></span>
+      <span class="chip hl">Nothing to run, install, or export — <strong>it's just there</strong></span>
+    </div>
+  </div>
 
-  <main>
+  <!-- WHAT YOU GET -->
+  <section id="preview">
+    <div class="wrap">
+      <div class="sec-label">01 · What you'll see</div>
+      <h2>The dashboard, at a glance</h2>
+      <p class="sec-intro">This is the actual dashboard, live — not a mockup. The frame below loads directly from the real build, so what you see is exactly what your team sees when they open it. Hover the numbered markers on the right for a quick explanation of what each section covers.</p>
 
-  <!-- 1. Problem -->
-  <section id="problem">
-    <div class="eyebrow">01 · The problem</div>
-    <h2>Why we're rebuilding the data layer</h2>
-    <p>The Demand Generation Dashboard — the custom-built dashboard embedded in your GHL account — lost its automated data feed when Windsor.ai was discontinued due to a billing restriction. The remaining data connection will be lost in a few days, once the Windsor.ai trial account ends.</p>
-    <p><strong>This project keeps the dashboard exactly as you approved it</strong> — same layout, same sections, same metrics from the June revision round — and replaces only the plumbing underneath. Claude Cowork becomes the refresh engine: on a weekday schedule (and on demand), it pulls current data through Zapier from <strong>GHL</strong> and <strong>Google Analytics</strong>, regenerates the dashboard, and publishes it. You keep using the same dashboard in the same place; only the numbers get fresher.</p>
-  </section>
-
-  <!-- 2. How refreshes work -->
-  <section id="refreshes">
-    <div class="eyebrow">02 · How refreshes work</div>
-    <h2>Scheduled, timestamped, and honest about freshness</h2>
-    <p>Each refresh regenerates the dashboard file and publishes it to the page your GHL embed already points at — so updates appear automatically, with no change to how you access it. Refreshes run on a weekday-morning schedule from the Rogers Hollow side, plus on demand whenever you need current numbers.</p>
-    <p>Two safeguards are built into every version of the page:</p>
-    <ul class="plain">
-      <li>A visible <strong>"Data as of [timestamp]"</strong> label, so it's always clear how current the numbers are.</li>
-      <li>A <strong>stale-data banner</strong> — if any source fails to pull, the dashboard says so rather than silently presenting old numbers as new.</li>
-    </ul>
-    <span class="asof">DATA AS OF — JUL 3, 2026 · 8:04 AM</span>
-  </section>
-
-  <!-- 3. Goals -->
-  <section id="goals">
-    <div class="eyebrow">03 · Goals &amp; success criteria</div>
-    <h2>What "done" looks like</h2>
-    <div class="tscroll"><table>
-      <tr><th>Goal</th><th>Success criteria</th></tr>
-      <tr><td>Restore the full data pipeline without Windsor.ai</td><td>All sections populate from GHL (direct integration) and Google Analytics (via Zapier); no dependency on Windsor.ai</td></tr>
-      <tr><td>Eliminate manual report assembly</td><td>A refresh is one scheduled run or one request — no manual data pulls</td></tr>
-      <tr><td>Zero regression on existing sections</td><td>Side-by-side check against the current dashboard: identical sections, labels, and ordering per the June revisions</td></tr>
-      <tr><td>Seamless experience on your side</td><td>Same embedded dashboard, same location; fresher data, plus a new Web Analytics section</td></tr>
-      <tr><td>Maintainable</td><td>Runs a month unattended without silent failure; stale data is always visibly flagged</td></tr>
-    </table></div>
-  </section>
-
-  <!-- 4. Dashboard spec -->
-  <section id="spec">
-    <div class="eyebrow">04 · Dashboard specification</div>
-    <h2>Layout frozen to the approved version</h2>
-    <p>Sections 1–3 replicate the current dashboard exactly, including every revision agreed in June. Two additions: a Google Analytics section replaces the Windsor-fed Ad Platform Reports, and a dedicated Form Fills section is added at your request.</p>
-    <div class="tscroll"><table>
-      <tr><th style="width:44px;">#</th><th>Section</th><th>Specification</th><th>Data source</th></tr>
-      <tr><td class="num">0</td><td><strong>Header + date filter</strong></td><td>"Demand Generation Dashboard" / "Demand Generation Reporting"; global date range filter</td><td><span class="chip">—</span></td></tr>
-      <tr><td class="num">1</td><td><strong>Opportunities Overview</strong></td><td>Four metric boxes — Total Generated, Open/Active, Won, Won Revenue — with the Open/Won box ordered before the Won Opportunities table</td><td><span class="chip">GHL via Zapier</span></td></tr>
-      <tr><td class="num">2</td><td><strong>Form Submissions</strong></td><td>Pie chart, four columns across; "Source Attribution" and "Leads by Source" labels</td><td><span class="chip">GHL via Zapier</span></td></tr>
-      <tr><td class="num">3</td><td><strong>Won Opportunities table</strong></td><td>Stage column (Pipeline column removed); current date column retained as built; date-range note per June revision</td><td><span class="chip">GHL via Zapier</span></td></tr>
-      <tr><td class="num">4</td><td><span class="new-tag">NEW</span><strong>Web Analytics</strong></td><td>Sessions, users, key events/conversions, channel breakdown (organic / paid / direct / referral), and top landing pages — all respecting the global date range filter. Replaces the retired Ad Platform Reports section.</td><td><span class="chip">GA4 via Zapier</span></td></tr>
-      <tr><td class="num">5</td><td><span class="new-tag">NEW</span><strong>Form Fills</strong></td><td>Dedicated form-fill reporting, respecting the global date range filter. <strong>Your call on layout:</strong> each form as its own dashboard card, or a single card (similar to the Pipeline view) filterable by landing page or form. Either is buildable — let us know your preference.</td><td><span class="chip">GHL</span></td></tr>
-    </table></div>
-  </section>
-
-  <!-- 5. Architecture -->
-  <section id="architecture">
-    <div class="eyebrow">05 · Architecture</div>
-    <h2>How the data flows</h2>
-    <div class="pipe">
-      <div class="pipe-row">
-        <div class="pipe-stack">
-          <div class="pipe-node src"><div class="t">GHL</div><div class="s">Direct secure integration — opportunities · form fills · pipelines</div></div>
-          <div class="pipe-node src"><div class="t">Google Analytics (GA4)</div><div class="s">Via Zapier connector — sessions · events · channels · landing pages</div></div>
+      <div class="mock" role="group" aria-label="Live embedded preview of the Coldwell Energy Demand Generation Dashboard">
+        <div class="mock-bar">
+          <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+          <span class="mock-title">Live · demandgenerationdashboard.netlify.app</span>
         </div>
-        <div class="pipe-arrow">→</div>
-        <div class="pipe-node"><div class="t">Claude Cowork</div><div class="s">Scheduled task pulls both sources and regenerates the dashboard file with fresh data</div></div>
-        <div class="pipe-arrow">→</div>
-        <div class="pipe-node dest"><div class="t">Your GHL Dashboard</div><div class="s">Published to the hosted page your embed points at — updates appear automatically</div></div>
+        <div class="live-embed">
+          <iframe src="https://demandgenerationdashboard.netlify.app/" title="Coldwell Energy Demand Generation Dashboard" loading="lazy"></iframe>
+
+          <button class="hotspot" type="button" style="top:70px" aria-label="About the header and filters">1
+            <span class="htip">Date range presets (7d/30d/90d/1y), a custom from&ndash;to picker, and a manual refresh &mdash; every panel below responds to whichever range is selected.</span>
+          </button>
+
+          <button class="hotspot" type="button" style="top:260px" aria-label="About Opportunities Overview">2
+            <span class="htip"><b>Opportunities Overview.</b> The six headline numbers for the selected range: generated, won, open, lost, won revenue, and blended ad spend/ROAS &mdash; all from GoHighLevel.</span>
+          </button>
+
+          <button class="hotspot" type="button" style="top:760px" aria-label="About the breakdown charts">3
+            <span class="htip"><b>Breakdowns.</b> Form submissions, leads by state, source attribution, and won-by-source &mdash; each a donut you can hover for exact numbers and click legend items to isolate a slice.</span>
+          </button>
+
+          <button class="hotspot" type="button" style="top:1230px" aria-label="About Win Rate and Pipeline Stage">4
+            <span class="htip"><b>Win Rate Summary</b> and <b>Pipeline Stage Breakdown.</b> The latter has its own pipeline filter, independent of the page-level date range, for drilling into one pipeline's stages.</span>
+          </button>
+
+          <button class="hotspot" type="button" style="top:1620px" aria-label="About the Funnel and AI Analysis">5
+            <span class="htip"><b>Funnel</b> (views &rarr; sign-ups &rarr; opportunities &rarr; won) and the <b>Daily AI Analysis</b> &mdash; a short written brief regenerated every morning from that day's numbers.</span>
+          </button>
+
+          <button class="hotspot" type="button" style="top:2140px" aria-label="About Paid Traffic and Engagement">6
+            <span class="htip"><b>Paid Traffic</b> shows what Google Analytics can tell us today (visitors, new users) &mdash; ad spend/CPM/CPC stay off until Google Ads or LinkedIn Ads access connects. <b>Engagement Rate by Source</b> below it is fully live now.</span>
+          </button>
+        </div>
       </div>
+      <p class="caption">This loads the real, currently-deployed dashboard on every page view. If Coldwell's data or design changes, this preview updates automatically &mdash; nothing here is a frozen screenshot. Hotspot positions are approximate and may drift slightly as the dashboard's content grows.</p>
     </div>
-    <p>Data is written into the dashboard at generation time, so every published version is a complete, self-contained snapshot. If historical trend views ever become a requirement, a lightweight data store can be added in a later phase — noted, not built now.</p>
   </section>
 
-  <!-- 6. Zapier plan -->
-  <section id="zapier">
-    <div class="eyebrow">06 · Zapier subscription</div>
-    <h2>Plan sizing and cost</h2>
-    <p>Zapier meets the billing requirement that ruled out Windsor.ai, and this build uses <strong>your existing Zapier subscription</strong> — the goal is to stay within the current budget with no new or unexpected subscription costs. In this architecture, only Google Analytics flows through Zapier (GHL connects directly), which keeps usage low. Each GA4 data pull consumes two "tasks" from the plan's monthly allowance; failed pulls are free. If the allowance were ever exhausted mid-month, the dashboard's GA4 section simply shows its stale-data banner until the allowance resets — GHL sections keep refreshing normally, and nothing fails silently.</p>
-    <div class="tscroll"><table>
-      <tr><th>Component</th><th>Est. pulls per refresh</th><th>Tasks per refresh</th></tr>
-      <tr><td>GHL — opportunities, form fills, won-opps table (direct integration)</td><td class="num">3–5</td><td class="num">0</td></tr>
-      <tr><td>GA4 — sessions/users, events, channels, landing pages (via Zapier)</td><td class="num">3–4</td><td class="num">6–8</td></tr>
-      <tr><td><strong>Total Zapier tasks per refresh</strong></td><td class="num"></td><td class="num"><strong>~6–8</strong></td></tr>
-    </table></div>
-    <p>At weekday-morning cadence (~22 runs) plus occasional on-demand refreshes (~8), estimated usage is <strong>roughly 180–240 tasks per month</strong>, with some extra during the initial testing phase.</p>
-    <div class="note"><p><strong>Pending from your side:</strong> confirmation of the current Zapier plan tier and monthly task allowance (plus refreshed login access, as the credentials on file appear outdated). Once confirmed, we verify the projected usage fits comfortably within the existing allowance — and flag anything before it could become a cost.</p></div>
-  </section>
+  <!-- HOW IT WORKS -->
+  <section id="flow">
+    <div class="wrap">
+      <div class="sec-label">02 · How it works</div>
+      <h2>Four sources, one flow — fully automatic</h2>
+      <p class="sec-intro">Every data source delivers itself to a central reporting hub on its own schedule, in the cloud. The dashboard reads from the hub every time it's opened. No laptops involved, no exports, no one pressing refresh.</p>
 
-  <!-- 7. Under evaluation -->
-  <section id="evaluation">
-    <div class="eyebrow">07 · Under evaluation</div>
-    <h2>Requested additions being verified</h2>
-    <h3>Ad Analytics — Google Ads &amp; LinkedIn Ads</h3>
-    <p>Yes — Google Ads and LinkedIn Ads metrics can be included in the dashboard, as long as the necessary connections are available. Before this section is committed, Phase 0 verifies that both platforms' integrations can retrieve reporting data (spend and performance metrics) in the shapes the dashboard needs, and that the required ad-account access is in place. Once verified, it's added to the layout; if a platform's integration can't support it, we'll present alternatives before promising anything.</p>
-    <h3>AI-generated optimization recommendations</h3>
-    <p>An exploration item rather than committed scope: once all connections are live and data is flowing correctly, we'll test whether Claude can surface useful optimization recommendations based on Google Ads, LinkedIn Ads, and Google Analytics performance. If the test produces genuinely useful output, we'll propose it as an addition; if not, we'll say so.</p>
-  </section>
+      <div class="flow">
+        <svg viewBox="0 0 900 380" xmlns="http://www.w3.org/2000/svg" aria-label="Data flow diagram: Google Ads, LinkedIn Ads, GA4 and GoHighLevel feed a central reporting hub, which powers the dashboard embedded in GHL">
+          <!-- source nodes (text centered, sized to fit) -->
+          <g>
+            <rect x="16" y="20" width="212" height="64" rx="10" fill="#FBFBF8" stroke="#E4E4DC" stroke-width="1.5"/>
+            <text x="122" y="48" text-anchor="middle" class="node-title">Google Ads</text>
+            <text x="122" y="68" text-anchor="middle" class="node-sub">spend &middot; CPM &middot; clicks &middot; daily</text>
 
-  <!-- 8. Risks -->
-  <section id="risks">
-    <div class="eyebrow">08 · Constraints &amp; risks</div>
-    <h2>What could go wrong, and what we've done about it</h2>
-    <div class="tscroll"><table>
-      <tr><th>Risk</th><th>Impact</th><th>Mitigation</th></tr>
-      <tr><td>Zapier task allowance exhausted mid-month</td><td>GA4 section goes stale until the allowance resets (GHL sections unaffected)</td><td>Usage fit-checked against your existing plan in Phase 0; monthly usage check; stale banner makes any gap visible</td></tr>
-      <tr><td>Google Ads / LinkedIn Ads integrations may not support pulling reporting data</td><td>Ad Analytics section can't be built as envisioned</td><td>Verified in Phase 0 before the section is committed; alternatives presented if verification fails</td></tr>
-      <tr><td>Zapier's GA4 pulls may not support every report shape (e.g., channel breakdowns over a date range)</td><td>New Web Analytics section can't populate as designed</td><td>Phase 0 proves every metric is retrievable <em>before</em> anything is built — this is the project's go/no-go gate</td></tr>
-      <tr><td>Scheduled refreshes run from the Rogers Hollow environment during business hours</td><td>A missed window delays that day's refresh</td><td>Skipped runs execute automatically at the next opportunity; the timestamp always shows exact data freshness</td></tr>
-      <tr><td>GA4 reporting lag (up to 24–48h on some reports)</td><td>"Yesterday's" numbers can shift slightly</td><td>The Web Analytics section carries its own data-through date</td></tr>
-      <tr><td>GHL API rate limits on large pulls</td><td>Occasional refresh failure</td><td>Queries scoped per date window, with automatic retry</td></tr>
-    </table></div>
-  </section>
+            <rect x="16" y="112" width="212" height="64" rx="10" fill="#FBFBF8" stroke="#E4E4DC" stroke-width="1.5"/>
+            <text x="122" y="140" text-anchor="middle" class="node-title">LinkedIn Ads</text>
+            <text x="122" y="160" text-anchor="middle" class="node-sub">spend &middot; CPM &middot; leads &middot; daily</text>
 
-  <!-- 9. Continuity -->
-  <section id="continuity">
-    <div class="eyebrow">09 · Continuity &amp; long-term maintenance</div>
-    <h2>Built so you're never dependent on one person</h2>
-    <p>The setup is designed for ownership: every credential and asset is provisioned under Coldwell-controlled accounts, operated on delegated access. If that access ever ends, you revoke it — nothing needs rebuilding, and nothing leaves with a person.</p>
-    <ul class="plain">
-      <li><strong>Accounts you own:</strong> the Zapier subscription (your existing account), the Google account connected to Analytics, the GHL access token issued from your own sub-account (revocable by you anytime), and the repository holding the dashboard code.</li>
-      <li><strong>Documentation that stays:</strong> the full operating runbook — setup from zero, refresh instructions, and a failure playbook — is stored version-controlled alongside the dashboard code itself.</li>
-      <li><strong>Full handoff path:</strong> if Coldwell Energy has (or creates) its own Claude account, the entire refresh operation can be recreated under your account and handed to your internal team — roughly an hour of setup following the runbook, plus a supervised refresh as handoff training.</li>
-      <li><strong>Graceful degradation:</strong> if refreshes ever pause, no data is lost — GHL and Google Analytics remain the systems of record. The dashboard shows its last-updated timestamp and catches up on the next run.</li>
-      <li><strong>Ongoing checks:</strong> the "Data as of" stamp is a health check anyone on your team can glance at; plus a monthly Zapier usage look and a quarterly credential review.</li>
-    </ul>
-  </section>
+            <rect x="16" y="204" width="212" height="64" rx="10" fill="#FBFBF8" stroke="#E4E4DC" stroke-width="1.5"/>
+            <text x="122" y="232" text-anchor="middle" class="node-title">Google Analytics 4</text>
+            <text x="122" y="252" text-anchor="middle" class="node-sub">landing page views &middot; daily</text>
 
-  <!-- 10. Build plan -->
-  <section id="plan">
-    <div class="eyebrow">10 · Build plan</div>
-    <h2>Four phases, roughly one week</h2>
+            <rect x="16" y="296" width="212" height="64" rx="10" fill="#FBFBF8" stroke="#E4E4DC" stroke-width="1.5"/>
+            <text x="122" y="324" text-anchor="middle" class="node-title">GoHighLevel</text>
+            <text x="122" y="344" text-anchor="middle" class="node-sub">pipeline &middot; leads &middot; 6 AM ET</text>
+          </g>
 
-    <div class="phase">
-      <div class="ph">PHASE 0<br>1 day</div>
-      <div>
-        <h4>Spike &amp; gates</h4>
-        <ul>
-          <li>Configure the Zapier connector; connect GHL and Google Analytics.</li>
-          <li>Prove every dashboard metric is retrievable — GHL opportunities, form submissions, won-opps fields, and each GA4 metric with date-range parameters.</li>
-          <li>Measure actual tasks-per-refresh and fit-check against your existing Zapier plan allowance.</li>
-          <li>Verify Google Ads and LinkedIn Ads reporting connections for the Ad Analytics section (Section 07).</li>
-          <li>Confirm the publishing path to the dashboard's hosted page.</li>
-        </ul>
-        <p class="gate">GATE — all metrics retrievable + usage within plan budget. No build until cleared.</p>
-      </div>
-    </div>
+          <!-- lanes into hub -->
+          <path class="lane" d="M228 52 C 312 52, 312 176, 372 184"/>
+          <path class="lane" d="M228 144 C 304 144, 312 184, 372 189"/>
+          <path class="lane" d="M228 236 C 304 236, 312 196, 372 193"/>
+          <path class="lane" d="M228 328 C 312 328, 312 204, 372 198"/>
+          <path class="pulse" d="M228 52 C 312 52, 312 176, 372 184"/>
+          <path class="pulse t" d="M228 144 C 304 144, 312 184, 372 189" style="animation-delay:.6s"/>
+          <path class="pulse" d="M228 236 C 304 236, 312 196, 372 193" style="animation-delay:1.2s"/>
+          <path class="pulse t" d="M228 328 C 312 328, 312 204, 372 198" style="animation-delay:1.8s"/>
 
-    <div class="phase">
-      <div class="ph">PHASE 1<br>1–2 days</div>
-      <div>
-        <h4>Data pipeline</h4>
-        <ul>
-          <li>Full data pull for a known date range; GHL numbers reconciled against the GHL interface, GA4 numbers against the GA4 interface.</li>
-          <li>Per-source error handling wired to the stale-data banner.</li>
-        </ul>
-      </div>
-    </div>
+          <!-- hub -->
+          <rect x="372" y="140" width="206" height="104" rx="12" fill="#E7F1F0" stroke="#155E63" stroke-width="1.5"/>
+          <text x="475" y="176" text-anchor="middle" class="node-title">Reporting hub</text>
+          <text x="475" y="196" text-anchor="middle" class="node-sub">Google Sheet &middot; aggregates only</text>
+          <text x="475" y="214" text-anchor="middle" class="node-sub">+ daily AI analysis</text>
 
-    <div class="phase">
-      <div class="ph">PHASE 2<br>1 day</div>
-      <div>
-        <h4>Dashboard regeneration</h4>
-        <ul>
-          <li>The approved dashboard becomes a template populated fresh on every run; the new Web Analytics section is built in.</li>
-          <li>Side-by-side regression check against the current dashboard on Sections 0–3.</li>
-        </ul>
-      </div>
-    </div>
+          <!-- lane to dashboard -->
+          <path class="lane" d="M578 192 C 642 192, 642 192, 702 192"/>
+          <path class="pulse" d="M578 192 C 642 192, 642 192, 702 192" style="animation-delay:.9s"/>
 
-    <div class="phase">
-      <div class="ph">PHASE 3<br>0.5 day</div>
-      <div>
-        <h4>Schedule &amp; publish</h4>
-        <ul>
-          <li>Weekday-morning schedule plus on-demand trigger; publishing step wired end-to-end.</li>
-          <li>Verification that your embedded dashboard reflects a fresh run automatically (allowing a few minutes for the hosting cache to update — a non-issue at daily cadence).</li>
-        </ul>
-      </div>
-    </div>
+          <!-- dashboard node -->
+          <rect x="702" y="132" width="182" height="120" rx="12" fill="#FBF3E2" stroke="#C9860F" stroke-width="1.5"/>
+          <text x="793" y="168" text-anchor="middle" class="node-title">Your dashboard</text>
+          <text x="793" y="190" text-anchor="middle" class="node-sub">embedded in GHL</text>
+          <text x="793" y="208" text-anchor="middle" class="node-sub">fresh on every open</text>
+          <text x="793" y="226" text-anchor="middle" class="node-sub">shareable by link</text>
+        </svg>
 
-    <div class="phase">
-      <div class="ph">PHASE 4<br>0.5 day</div>
-      <div>
-        <h4>Handoff</h4>
-        <ul>
-          <li>One-week monitoring period.</li>
-          <li>Walkthrough of the reconnected data layer and the new Web Analytics section.</li>
-        </ul>
+        <div class="flow-legend">
+          <span><b>Cloud-scheduled</b> — feeds run on the platforms' side</span>
+          <span><b>Aggregates only</b> — no contact names or emails leave GHL</span>
+          <span><b>Read-only</b> — nothing can change your ads or CRM</span>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- 11. Decisions -->
-  <section id="decisions">
-    <div class="eyebrow">11 · Decisions on record</div>
-    <h2>What's been agreed</h2>
-    <div class="tscroll"><table>
-      <tr><th style="width:96px;">Date</th><th>Decision</th><th>Rationale</th></tr>
-      <tr><td class="num">Jul 6</td><td><strong>Architecture: GHL via direct secure integration; Google Analytics via Zapier</strong></td><td>Uses the most capable connection for each source; keeps Zapier usage well within your existing plan. Zapier meets the billing requirement that ruled out Windsor.ai</td></tr>
-      <tr><td class="num">Jul 3</td><td><strong>Layout frozen</strong> to the approved dashboard; only the data pipeline changes</td><td>The layout was already reviewed and revised in June</td></tr>
-      <tr><td class="num">Jul 6</td><td><strong>Ad Analytics (Google Ads + LinkedIn Ads) requested — pending connection verification</strong> (updates the earlier decision to retire the ad section)</td><td>Added at your request; committed once reporting connections are verified in Phase 0</td></tr>
-      <tr><td class="num">Jul 6</td><td><strong>Form Fills section added</strong> — layout choice pending (per-form cards vs. one filterable card)</td><td>Added at your request; awaiting your layout preference</td></tr>
-      <tr><td class="num">Jul 6</td><td><strong>AI optimization recommendations: exploration item</strong></td><td>Tested after all connections are live; proposed only if the output proves useful</td></tr>
-      <tr><td class="num">Jul 6</td><td><strong>Budget: stay within the existing Zapier subscription</strong> — no new or unexpected costs</td><td>Plan tier confirmation pending from Coldwell</td></tr>
-      <tr><td class="num">Jul 3</td><td><strong>New Web Analytics section</strong> (GA4): sessions, users, key events/conversions, channel breakdown, top landing pages</td><td>Restores web-side reporting without Windsor.ai</td></tr>
-      <tr><td class="num">Jul 3</td><td><strong>Won Opportunities date column ships as currently built</strong></td><td>Column rename deferred; can be revisited any time</td></tr>
-
-      <tr><td class="num">Jul 3</td><td><strong>Publishing via the dashboard's existing hosted page</strong>; the GHL embed updates automatically</td><td>No change to how the dashboard is accessed</td></tr>
-    </table></div>
+  <!-- METRICS -->
+  <section id="metrics">
+    <div class="wrap">
+      <div class="sec-label">03 · The numbers</div>
+      <h2>Every metric, and where it comes from</h2>
+      <p class="sec-intro">Each figure on the dashboard traces to exactly one source of truth, so there's never a question of "which number is right." Data sources in this build: <strong>GoHighLevel</strong> and <strong>Google Analytics</strong> — see the note below the table for what that means for ad-platform numbers.</p>
+      <table>
+        <thead><tr><th>You'll see</th><th>Source of truth</th><th>How it's calculated</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Carried over from your current dashboard</strong> — total generated, won &amp; close rate, open/active, lost</td><td><span class="src">GoHighLevel</span></td><td>Same opportunities overview you have today, totaled daily across all pipelines</td></tr>
+          <tr><td>Form submissions by source (all forms)</td><td><span class="src">GoHighLevel</span></td><td>Every form included — counts per source, as on the current dashboard</td></tr>
+          <tr><td>Win rate summary &amp; pipeline stage breakdown</td><td><span class="src">GoHighLevel</span></td><td>All pipelines, filterable, including nurture stages and how long deals sit in them — the pipeline filter here is independent of the page-level date range</td></tr>
+          <tr><td>Leads by source &amp; by state</td><td><span class="src">GoHighLevel</span></td><td>Aggregated counts from contact records — individual contacts never leave GHL</td></tr>
+          <tr><td><strong>New:</strong> overall form rate</td><td><span class="src">GHL + Google Analytics</span></td><td>Total sign-ups &divide; landing page views from GA4. Per-page rates can be added later if useful</td></tr>
+          <tr><td><strong>New:</strong> visitors, new users &amp; conversions by traffic source</td><td><span class="src">Google Analytics</span></td><td>Sessions and new users where a source looks like paid traffic (Google, LinkedIn), plus site-wide conversions where GA4 has them configured</td></tr>
+          <tr><td><strong>New:</strong> engagement rate by source</td><td><span class="src">Google Analytics</span></td><td>Engaged sessions &divide; total sessions per traffic source, summed across the selected range — not an average of daily rates, so one slow day can't skew it</td></tr>
+          <tr><td><strong>New:</strong> daily AI analysis</td><td><span class="src">All of the above</span></td><td>Each morning, AI reviews the fresh numbers and writes a short brief: what moved, why it likely moved, and suggested next actions</td></tr>
+          <tr style="background:var(--amber-soft)"><td><strong>Not included:</strong> ad spend, CPM, CPC, CTR, impressions</td><td><span class="src" style="color:var(--amber)">Google Ads &middot; LinkedIn Ads</span></td><td>Coldwell's organization settings don't currently allow granting outside access to these ad accounts. Nothing on our end is missing or broken — these numbers simply aren't reachable without that access</td></tr>
+          <tr style="background:var(--amber-soft)"><td><strong>Not included:</strong> ROAS (return on ad spend)</td><td><span class="src" style="color:var(--amber)">&mdash;</span></td><td>ROAS needs ad spend as one side of the equation. Without Google Ads / LinkedIn Ads access there's no spend figure to divide won revenue by, so this stays out until that access opens up, if ever</td></tr>
+        </tbody>
+      </table>
+      <p class="caption" style="margin-top:18px;text-align:left">&#9888;&#65039; <strong>What this means in practice:</strong> the dashboard shows everything GoHighLevel and Google Analytics can tell us — pipeline, leads, forms, and website traffic quality — but not ad spend, cost-per-click, or true ROAS. If Coldwell's access policy changes later, or you connect a paid tool like Windsor.ai yourselves, those panels can be switched on without rebuilding anything else.</p>
+    </div>
   </section>
 
-  </main>
-</div>
+  <!-- TIMELINE -->
+  <section id="timeline">
+    <div class="wrap">
+      <div class="sec-label">04 · The build</div>
+      <h2>Five phases, each with a clear exit</h2>
+      <p class="sec-intro">We don't move to the next phase until the current one is verified working. <strong>We're currently in Phase 2</strong> — the dashboard is built and live, and we're refining it based on your feedback.</p>
+      <div class="phases">
+        <div class="phase p0 done">
+          <h3>Phase 0 — Foundations <span class="status-badge done">&#10003; Done</span></h3>
+          <div class="who">Coldwell + Rogers Hollow, together</div>
+          <p>GHL and Google Analytics access secured. Google Ads and LinkedIn Ads access was requested but isn't available — Coldwell's organization settings restrict granting outside access to those accounts. This closes out that item rather than leaving it pending; see the note in <strong>03 &middot; The numbers</strong> for what that means for the dashboard.</p>
+        </div>
+        <div class="phase done">
+          <h3>Phase 1 — Data feeds live <span class="status-badge done">&#10003; Done</span></h3>
+          <div class="who">Rogers Hollow</div>
+          <p>GHL and Google Analytics both delivering into the reporting hub automatically, on their own daily schedule — no manual steps, no machine that has to stay on.</p>
+        </div>
+        <div class="phase current">
+          <h3>Phase 2 — Dashboard build <span class="status-badge current">&#9679; In progress</span></h3>
+          <div class="who">Rogers Hollow · in active review with Anj</div>
+          <p>The dashboard is built, deployed, and live at its preview link, including the daily AI analysis panel. We're iterating on layout and polish now, ahead of the Coldwell team walkthrough.</p>
+        </div>
+        <div class="phase">
+          <h3>Phase 3 — Embed &amp; walkthrough</h3>
+          <div class="who">Rogers Hollow + Coldwell team</div>
+          <p>Dashboard added as a widget inside your GHL dashboard, tested on desktop and mobile, and walked through with the team. One round of adjustments included.</p>
+        </div>
+        <div class="phase">
+          <h3>Phase 4 — Handoff</h3>
+          <div class="who">Rogers Hollow</div>
+          <p>Plain-English documentation: what refreshes when, what to do if a number looks off, and how to request new metrics later.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<button id="backTop" aria-label="Back to top" title="Back to top">↑</button>
+  <!-- WHAT WE NEED / GUARDRAILS -->
+  <section id="needs">
+    <div class="wrap">
+      <div class="sec-label">05 &middot; Data sources</div>
+      <h2>Access status</h2>
+      <p class="sec-intro">Everything needed from Coldwell has already been resolved &mdash; nothing is pending on your side.</p>
+      <div class="grid2">
+        <div class="need tealcard"><h4>GoHighLevel &mdash; &#10003; Connected</h4><p>View-only integration key scoped to contacts, opportunities, and forms &mdash; reads numbers for reporting, can't edit or delete anything.</p></div>
+        <div class="need tealcard"><h4>Google Analytics &mdash; &#10003; Connected</h4><p>Viewer access on the GA4 property. Powers landing page views, form conversion rate, traffic-by-source, and engagement rate.</p></div>
+        <div class="need accent"><h4>Google Ads &mdash; Not available</h4><p>Access was requested; Coldwell's organization settings don't currently permit granting it to outside accounts. Ad spend, CPM, CPC, and ROAS stay out of the dashboard as a result &mdash; see <strong>03 &middot; The numbers</strong>.</p></div>
+        <div class="need accent"><h4>LinkedIn Ads &mdash; Not available</h4><p>Same restriction as Google Ads. If Coldwell's policy changes later, or a paid connector like Windsor.ai is added independently, these can be switched on without rebuilding the dashboard.</p></div>
+        <div class="need"><h4>Scope &mdash; already decided &#10003;</h4><p><strong>All pipelines</strong> included &middot; <strong>all forms</strong> included &middot; view filters: <strong>7 / 30 / 90 days / 1 year + custom range</strong> &middot; full scope of the current Demand Generation Dashboard carried over, with Google Analytics traffic data and daily AI analysis added.</p></div>
+      </div>
+
+      <h2 style="margin-top:56px">Our guardrails</h2>
+      <p class="sec-intro">Built in from day one &mdash; not added later.</p>
+      <div class="grid2">
+        <div class="need tealcard"><h4>Privacy by design</h4><p>The dashboard shows totals and trends only. Names, emails, and phone numbers never leave GoHighLevel &mdash; drill-down into individual leads happens inside GHL, where your permissions apply.</p></div>
+        <div class="need tealcard"><h4>View-only by design</h4><p>Every data connection reads &mdash; it never writes. Nothing in this system can edit a campaign, change a budget, or touch a contact record.</p></div>
+        <div class="need tealcard"><h4>Honest numbers</h4><p>Every panel shows a &ldquo;data as of&rdquo; timestamp, and anything we can't attribute or don't have access to is labeled as such instead of being guessed or hidden.</p></div>
+        <div class="need tealcard"><h4>Built to extend</h4><p>New metrics, or an ad platform later if access ever opens up? The architecture is designed so additions are add-ons, not rebuilds.</p></div>
+      </div>
+    </div>
+  </section>
+
+</main>
 
 <footer>
-  <div class="wrap" style="display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;">
-    <div class="made">Created by <span>Rogers Hollow</span> for Coldwell Energy</div>
-    <div class="date">JULY 2026 · DEMAND GENERATION DASHBOARD</div>
+  <div class="wrap foot-inner">
+    <span>Prepared by <strong>Rogers Hollow</strong> for Coldwell Energy · July 2026</span>
+    <span>Questions or changes → Anj</span>
   </div>
 </footer>
-
-<script>
-(function(){
-  // Back to top
-  var btn = document.getElementById('backTop');
-  window.addEventListener('scroll', function(){
-    if (window.scrollY > 400) { btn.classList.add('show'); }
-    else { btn.classList.remove('show'); }
-  }, {passive:true});
-  btn.addEventListener('click', function(){
-    window.scrollTo({top:0, behavior:'smooth'});
-  });
-
-  // Active TOC highlighting
-  var links = Array.prototype.slice.call(document.querySelectorAll('.toc a'));
-  var sections = links.map(function(a){
-    return document.querySelector(a.getAttribute('href'));
-  }).filter(Boolean);
-
-  function setActive(id){
-    links.forEach(function(a){
-      a.classList.toggle('active', a.getAttribute('href') === '#' + id);
-    });
-  }
-
-  if ('IntersectionObserver' in window) {
-    var visible = {};
-    var obs = new IntersectionObserver(function(entries){
-      entries.forEach(function(e){ visible[e.target.id] = e.isIntersecting; });
-      for (var i = 0; i < sections.length; i++) {
-        if (visible[sections[i].id]) { setActive(sections[i].id); break; }
-      }
-    }, {rootMargin:'-10% 0px -70% 0px', threshold:0});
-    sections.forEach(function(s){ obs.observe(s); });
-  }
-  if (sections.length) setActive(sections[0].id);
-})();
-</script>
 
 </body>
 </html>
