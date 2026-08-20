@@ -80,11 +80,12 @@
 
   .subsec{margin-top:44px}
   .subsec:first-child{margin-top:0}
-  .subsec h3{font-size:19px;font-weight:800;margin-bottom:6px;display:flex;align-items:center;gap:10px}
+  .subsec h3{font-size:19px;font-weight:800;margin-bottom:6px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
   .subsec .subsec-note{font-size:13.5px;color:var(--ink-soft);margin-bottom:16px;max-width:70ch}
   .status-pill{font-family:'DM Mono',monospace;font-size:10.5px;font-weight:600;padding:3px 10px;border-radius:999px;letter-spacing:.02em}
   .status-pill.live{background:var(--teal-soft);color:var(--teal)}
   .status-pill.watch{background:var(--amber-soft);color:var(--amber)}
+  .status-pill.soon{background:#EFEFEA;color:var(--ink-soft)}
 
   .grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
   .need{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px 24px}
@@ -105,6 +106,109 @@
   @media (max-width:760px){
     .grid2{grid-template-columns:1fr}
     .hero{padding:52px 0 40px}
+  }
+
+  /* ============================================================
+     DASHBOARD SNAPSHOT (structure-only layout preview, inline)
+     All classes prefixed .snap- so they never collide with the
+     document's own styles. No real data — skeleton shapes only.
+     ============================================================ */
+  .snap-frame{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--card);box-shadow:0 26px 60px -34px rgba(22,34,46,.4)}
+  .snap-chrome{display:flex;align-items:center;gap:14px;padding:11px 16px;background:#F1F1EC;border-bottom:1px solid var(--line)}
+  .snap-dots{display:flex;gap:6px}
+  .snap-dots i{width:11px;height:11px;border-radius:50%;display:block;background:#CFCFC7}
+  .snap-dots i:nth-child(1){background:#E3B7A2}
+  .snap-dots i:nth-child(2){background:#EBD5A6}
+  .snap-dots i:nth-child(3){background:#B9D3C0}
+  .snap-url{flex:1;font-family:'DM Mono',monospace;font-size:12px;color:var(--ink-soft);background:var(--card);border:1px solid var(--line);border-radius:7px;padding:5px 12px;text-align:center;letter-spacing:.02em}
+  .snap-lock{font-size:11px}
+  .snap-canvas{padding:16px;background:#F7F7F2;display:flex;flex-direction:column;gap:12px}
+
+  .snap-topbar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:11px 14px}
+  .snap-topbar .snap-title{font-family:'Manrope',sans-serif;font-weight:800;font-size:12.5px;color:var(--ink)}
+  .snap-pills{display:flex;gap:6px;flex-wrap:wrap}
+  .snap-pill{font-family:'DM Mono',monospace;font-size:10px;padding:4px 9px;border-radius:999px;border:1px solid var(--line);color:var(--ink-soft);background:#FCFCFA}
+  .snap-pill.on{background:var(--teal);border-color:var(--teal);color:#fff}
+
+  .snap-band-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);margin:4px 2px -2px}
+
+  .snap-card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 13px;min-width:0}
+  .snap-card .snap-h{font-family:'Manrope',sans-serif;font-weight:700;font-size:11.5px;color:var(--ink);margin-bottom:9px;display:flex;align-items:center;justify-content:space-between;gap:6px;line-height:1.25}
+  .snap-card .snap-h span{font-family:'DM Mono',monospace;font-size:8.5px;font-weight:400;color:var(--teal);background:var(--teal-soft);padding:2px 6px;border-radius:999px;white-space:nowrap}
+  .snap-card .snap-h span.rt{color:var(--amber);background:var(--amber-soft)}
+
+  .snap-grid{display:grid;gap:12px}
+  .snap-g4{grid-template-columns:repeat(4,1fr)}
+  .snap-g3{grid-template-columns:repeat(3,1fr)}
+  .snap-g2{grid-template-columns:1fr 1fr}
+  .snap-c2{grid-column:span 2}
+
+  /* skeleton primitives */
+  .sk-toggle{display:flex;gap:5px;margin-bottom:11px;flex-wrap:wrap}
+  .sk-toggle b{font-family:'DM Mono',monospace;font-weight:400;font-size:9px;padding:3px 8px;border-radius:999px;border:1px solid var(--line);color:var(--ink-soft);background:#FCFCFA}
+  .sk-toggle b.on{background:var(--amber);border-color:var(--amber);color:#fff}
+
+  .sk-kpis{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+  .sk-kpi{background:#FCFCFA;border:1px solid var(--line);border-radius:8px;padding:10px}
+  .sk-kpi .lab{height:6px;width:70%;border-radius:3px;background:#E4E4DC;margin-bottom:9px}
+  .sk-kpi .num{height:15px;width:52%;border-radius:4px;background:linear-gradient(90deg,var(--teal),#3E8C90)}
+  .sk-kpi.amber .num{background:linear-gradient(90deg,var(--amber),#E0A63C)}
+  .sk-kpi .sub{height:5px;width:38%;border-radius:3px;background:#E4E4DC;margin-top:7px}
+
+  .sk-donut{width:74px;height:74px;border-radius:50%;margin:2px auto 6px;background:conic-gradient(var(--teal) 0 42%,var(--amber) 42% 68%,#C9CFC9 68% 85%,#E4E4DC 85% 100%);position:relative}
+  .sk-donut::after{content:"";position:absolute;inset:20px;border-radius:50%;background:var(--card)}
+  .sk-legend{display:flex;flex-direction:column;gap:5px}
+  .sk-legend i{display:flex;align-items:center;gap:6px;height:6px}
+  .sk-legend i b{width:7px;height:7px;border-radius:2px;flex-shrink:0}
+  .sk-legend i em{height:5px;border-radius:3px;background:#E4E4DC;flex:1;max-width:78px}
+
+  .sk-bars{display:flex;align-items:flex-end;gap:7px;height:74px;padding-top:6px}
+  .sk-bars span{flex:1;background:linear-gradient(180deg,#3E8C90,var(--teal));border-radius:3px 3px 0 0;opacity:.9}
+  .sk-hbars{display:flex;flex-direction:column;gap:7px;padding-top:2px}
+  .sk-hbars i{display:flex;align-items:center;gap:7px}
+  .sk-hbars i em{height:8px;border-radius:3px;background:linear-gradient(90deg,var(--teal),#69A9AC)}
+  .sk-hbars i u{height:5px;flex:1;background:#EDEDE7;border-radius:3px;text-decoration:none}
+
+  .sk-funnel{display:flex;flex-direction:column;gap:5px;align-items:center;padding-top:4px}
+  .sk-funnel span{height:12px;border-radius:3px;background:linear-gradient(90deg,var(--teal),#69A9AC)}
+
+  .sk-rows{display:flex;flex-direction:column;gap:7px;padding-top:2px}
+  .sk-rows i{display:flex;justify-content:space-between;align-items:center;gap:8px}
+  .sk-rows i em{height:6px;border-radius:3px;background:#E4E4DC;flex:1;max-width:60%}
+  .sk-rows i u{height:6px;width:26px;border-radius:3px;background:#D7DED9;text-decoration:none}
+
+  .sk-text{display:flex;flex-direction:column;gap:6px;padding-top:2px}
+  .sk-text i{height:6px;border-radius:3px;background:#E7E7E1}
+  .sk-text i:nth-child(1){width:96%}
+  .sk-text i:nth-child(2){width:88%}
+  .sk-text i:nth-child(3){width:92%}
+  .sk-text i:nth-child(4){width:64%}
+
+  .sk-line{height:78px;width:100%;display:block}
+  .sk-big{display:flex;align-items:baseline;gap:8px;padding-top:4px}
+  .sk-big b{height:22px;width:64px;border-radius:5px;background:linear-gradient(90deg,var(--teal),#3E8C90)}
+  .sk-big em{height:8px;width:40px;border-radius:3px;background:#E4E4DC}
+
+  .sk-soon{border:1px dashed #CFCFC7!important;background:repeating-linear-gradient(135deg,#FAFAF7,#FAFAF7 8px,#F4F4EE 8px,#F4F4EE 16px)}
+  .sk-soon .snap-h span{color:var(--ink-soft);background:#E9E9E3}
+  .sk-soon .sk-soonbox{height:52px;border-radius:7px;border:1px dashed #D3D3CB;display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:9.5px;color:#9A9A90;letter-spacing:.08em}
+
+  .sk-velo{display:flex;gap:10px;align-items:center}
+  .sk-velo .sels{display:flex;flex-direction:column;gap:6px;flex:1}
+  .sk-velo .sels u{height:20px;border-radius:6px;background:#FCFCFA;border:1px solid var(--line);text-decoration:none}
+  .sk-velo .res{display:flex;flex-direction:column;gap:4px;align-items:flex-end}
+  .sk-velo .res b{height:20px;width:46px;border-radius:5px;background:linear-gradient(90deg,var(--teal),#3E8C90)}
+  .sk-velo .res em{height:6px;width:60px;border-radius:3px;background:#E4E4DC}
+
+  .snap-cap{font-family:'DM Mono',monospace;font-size:11px;color:var(--ink-soft);text-align:center;margin-top:14px;letter-spacing:.02em}
+  .snap-cap b{color:var(--amber);font-weight:500}
+
+  @media (max-width:760px){
+    .snap-canvas{padding:11px;gap:9px}
+    .sk-kpis{grid-template-columns:repeat(3,1fr)}
+    .snap-g4{grid-template-columns:1fr 1fr}
+    .snap-g3{grid-template-columns:1fr 1fr}
+    .snap-c2{grid-column:span 2}
   }
 </style>
 </head>
@@ -136,9 +240,122 @@
     <div class="wrap">
       <div class="sec-label">01 · What you'll see</div>
       <h2>The dashboard, at a glance</h2>
-      <p class="sec-intro">This document is meant to be downloaded and opened on its own, so rather than embed the live dashboard in a frame here (browsers block that for files opened directly from disk), here's a direct link to it, plus a quick map of what's on it. Full detail on every panel — what it shows and how it's measured — is in the Widget Reference section below.</p>
+      <p class="sec-intro">Here's a layout snapshot of the dashboard — the arrangement of every panel, so you can get oriented before the detailed walkthrough further down. It's a structure preview, so the shapes stand in for the live charts rather than showing real numbers. The working dashboard, with your real data, is one click away underneath.</p>
 
-      <a class="launch-card" href="https://demandgenerationdashboard.netlify.app/" target="_blank" rel="noopener">
+      <!-- ===================== INLINE SNAPSHOT ===================== -->
+      <div class="snap-frame" role="img" aria-label="Layout preview of the Demand Generation Dashboard showing the arrangement of every panel.">
+        <div class="snap-chrome">
+          <div class="snap-dots"><i></i><i></i><i></i></div>
+          <div class="snap-url"><span class="snap-lock">🔒</span> demandgenerationdashboard.netlify.app</div>
+        </div>
+        <div class="snap-canvas">
+
+          <!-- filter bar -->
+          <div class="snap-topbar">
+            <div class="snap-title">Marketing Performance Dashboard</div>
+            <div class="snap-pills">
+              <span class="snap-pill">7d</span>
+              <span class="snap-pill on">30d</span>
+              <span class="snap-pill">90d</span>
+              <span class="snap-pill">1yr</span>
+              <span class="snap-pill">Custom</span>
+            </div>
+          </div>
+
+          <!-- opportunities overview -->
+          <div class="snap-band-label">Opportunities Overview</div>
+          <div class="snap-card">
+            <div class="sk-toggle">
+              <b class="on">Prospecting</b><b>Service</b><b>Marketing-only</b><b>All Opportunities</b>
+            </div>
+            <div class="sk-kpis">
+              <div class="sk-kpi"><div class="lab"></div><div class="num"></div><div class="sub"></div></div>
+              <div class="sk-kpi"><div class="lab"></div><div class="num"></div><div class="sub"></div></div>
+              <div class="sk-kpi"><div class="lab"></div><div class="num"></div><div class="sub"></div></div>
+              <div class="sk-kpi"><div class="lab"></div><div class="num"></div><div class="sub"></div></div>
+              <div class="sk-kpi amber"><div class="lab"></div><div class="num"></div><div class="sub"></div></div>
+              <div class="sk-kpi amber"><div class="lab"></div><div class="num"></div><div class="sub"></div></div>
+            </div>
+          </div>
+
+          <!-- breakdowns -->
+          <div class="snap-band-label">Breakdowns</div>
+          <div class="snap-grid snap-g4">
+            <div class="snap-card"><div class="snap-h">Source Attribution</div><div class="sk-donut"></div></div>
+            <div class="snap-card"><div class="snap-h">Lead Source <span class="rt">checking</span></div><div class="sk-donut"></div></div>
+            <div class="snap-card"><div class="snap-h">Form Submissions</div><div class="sk-bars"><span style="height:60%"></span><span style="height:85%"></span><span style="height:45%"></span><span style="height:70%"></span><span style="height:35%"></span></div></div>
+            <div class="snap-card"><div class="snap-h">Won by Source</div><div class="sk-bars"><span style="height:80%"></span><span style="height:50%"></span><span style="height:65%"></span><span style="height:30%"></span></div></div>
+          </div>
+
+          <div class="snap-grid snap-g2">
+            <div class="snap-card"><div class="snap-h">Pipeline Stage Breakdown <span>own filter</span></div><div class="sk-hbars"><i><em style="width:34%"></em><u></u></i><i><em style="width:52%"></em><u></u></i><i><em style="width:26%"></em><u></u></i><i><em style="width:44%"></em><u></u></i></div></div>
+            <div class="snap-card"><div class="snap-h">Stage Snapshots</div><div class="sk-kpis" style="grid-template-columns:repeat(3,1fr)"><div class="sk-kpi"><div class="lab"></div><div class="num"></div></div><div class="sk-kpi"><div class="lab"></div><div class="num"></div></div><div class="sk-kpi"><div class="lab"></div><div class="num"></div></div></div></div>
+          </div>
+
+          <div class="snap-grid snap-g4">
+            <div class="snap-card"><div class="snap-h">Discovery Mtg Complete</div><div class="sk-big"><b></b><em></em></div></div>
+            <div class="snap-card sk-soon"><div class="snap-h">Referrals in Progress <span>soon</span></div><div class="sk-soonbox">COMING SOON</div></div>
+            <div class="snap-card sk-soon"><div class="snap-h">Proposal Completed <span>soon</span></div><div class="sk-soonbox">COMING SOON</div></div>
+            <div class="snap-card sk-soon"><div class="snap-h">EPC Signed &amp; Deposit <span>soon</span></div><div class="sk-soonbox">COMING SOON</div></div>
+          </div>
+
+          <div class="snap-grid snap-g4">
+            <div class="snap-card"><div class="snap-h">Funnel</div><div class="sk-funnel"><span style="width:92%"></span><span style="width:68%"></span><span style="width:44%"></span><span style="width:24%"></span></div></div>
+            <div class="snap-card"><div class="snap-h">Win Rate <span>all-time</span></div><div class="sk-big"><b></b><em></em></div></div>
+            <div class="snap-card"><div class="snap-h">Lead Origin</div><div class="sk-donut" style="background:conic-gradient(var(--teal) 0 58%,var(--amber) 58% 100%)"></div></div>
+            <div class="snap-card"><div class="snap-h">Interest · Web Intent</div><div class="sk-hbars"><i><em style="width:40%"></em><u></u></i><i><em style="width:60%"></em><u></u></i><i><em style="width:30%"></em><u></u></i></div></div>
+          </div>
+
+          <div class="snap-grid snap-g3">
+            <div class="snap-card"><div class="snap-h">Top Pages Visited</div><div class="sk-rows"><i><em></em><u></u></i><i><em></em><u></u></i><i><em></em><u></u></i></div></div>
+            <div class="snap-card"><div class="snap-h">Top Referrers</div><div class="sk-rows"><i><em></em><u></u></i><i><em></em><u></u></i><i><em></em><u></u></i></div></div>
+            <div class="snap-card"><div class="snap-h">Leads by State</div><div class="sk-hbars"><i><em style="width:50%"></em><u></u></i><i><em style="width:36%"></em><u></u></i><i><em style="width:28%"></em><u></u></i></div></div>
+          </div>
+
+          <!-- daily AI -->
+          <div class="snap-band-label">Daily AI Analysis</div>
+          <div class="snap-card"><div class="snap-h">This morning's read <span>refreshed daily</span></div><div class="sk-text"><i></i><i></i><i></i><i></i></div></div>
+
+          <!-- velocity -->
+          <div class="snap-band-label">Opportunity Velocity</div>
+          <div class="snap-card">
+            <div class="snap-h">Form → Stage velocity <span>Marketing toggle</span></div>
+            <div class="sk-velo">
+              <div class="sels"><u></u><u></u></div>
+              <div class="res"><b></b><em></em></div>
+            </div>
+          </div>
+
+          <!-- paid traffic -->
+          <div class="snap-band-label">Paid Traffic — Google &amp; LinkedIn</div>
+          <div class="snap-grid snap-g4">
+            <div class="snap-card"><div class="snap-h">Spend</div><div class="sk-big"><b></b></div></div>
+            <div class="snap-card"><div class="snap-h">Clicks</div><div class="sk-big"><b></b></div></div>
+            <div class="snap-card"><div class="snap-h">CTR</div><div class="sk-big"><b></b></div></div>
+            <div class="snap-card"><div class="snap-h">Engagement by Source</div><div class="sk-hbars"><i><em style="width:55%"></em><u></u></i><i><em style="width:38%"></em><u></u></i></div></div>
+          </div>
+
+          <!-- rb2b -->
+          <div class="snap-band-label">RB2B — Website Visitor Identification</div>
+          <div class="snap-card">
+            <div class="snap-h">Identification Types per Day <span class="rt">real time</span></div>
+            <svg class="sk-line" viewBox="0 0 320 78" preserveAspectRatio="none" aria-hidden="true">
+              <polyline points="0,58 40,50 80,54 120,40 160,44 200,30 240,36 280,22 320,28" fill="none" stroke="#155E63" stroke-width="2"/>
+              <polyline points="0,66 40,62 80,60 120,58 160,52 200,54 240,46 280,48 320,42" fill="none" stroke="#C9860F" stroke-width="2"/>
+              <polyline points="0,72 40,70 80,71 120,66 160,68 200,63 240,64 280,60 320,61" fill="none" stroke="#B9C4BC" stroke-width="2"/>
+            </svg>
+          </div>
+          <div class="snap-grid snap-g2">
+            <div class="snap-card"><div class="snap-h">Top Pages Visited <span>all-time</span></div><div class="sk-rows"><i><em></em><u></u></i><i><em></em><u></u></i></div></div>
+            <div class="snap-card"><div class="snap-h">Top Referrers <span>all-time</span></div><div class="sk-rows"><i><em></em><u></u></i><i><em></em><u></u></i></div></div>
+          </div>
+
+        </div>
+      </div>
+      <p class="snap-cap">Layout preview — <b>structure only, not live data.</b> Open the real dashboard below to see your actual numbers.</p>
+      <!-- =================== END INLINE SNAPSHOT =================== -->
+
+      <a class="launch-card" href="https://demandgenerationdashboard.netlify.app/" target="_blank" rel="noopener" style="margin-top:26px">
         <div class="launch-card-main">
           <span class="launch-card-label">Open the live dashboard</span>
           <span class="launch-card-url">demandgenerationdashboard.netlify.app</span>
@@ -148,12 +365,12 @@
 
       <div class="section-map">
         <div class="section-map-item"><span class="section-map-num">1</span><div><h4>Header &amp; filters</h4><p>Pick a time range (last 7, 30, 90 days, or a year), or set a custom one — everything below updates to match.</p></div></div>
-        <div class="section-map-item"><span class="section-map-num">2</span><div><h4>Opportunities Overview</h4><p>Your six most important numbers, all in one place.</p></div></div>
-        <div class="section-map-item"><span class="section-map-num">3</span><div><h4>Opportunity Velocity</h4><p>How fast leads move from a form to a pipeline stage.</p></div></div>
-        <div class="section-map-item"><span class="section-map-num">4</span><div><h4>Breakdowns</h4><p>Forms, leads by state, lead sources, and won deals by source.</p></div></div>
-        <div class="section-map-item"><span class="section-map-num">5</span><div><h4>Win Rate, Pipeline Stage &amp; Lead Source</h4><p>Where your open opportunities stand right now.</p></div></div>
-        <div class="section-map-item"><span class="section-map-num">6</span><div><h4>Funnel &amp; Daily AI Analysis</h4><p>Visitors to won deals, plus a daily written summary.</p></div></div>
-        <div class="section-map-item"><span class="section-map-num">7</span><div><h4>Paid Traffic &amp; Engagement</h4><p>How your Google and LinkedIn ads are performing.</p></div></div>
+        <div class="section-map-item"><span class="section-map-num">2</span><div><h4>Opportunities Overview</h4><p>Your six most important numbers, with a four-way pipeline toggle.</p></div></div>
+        <div class="section-map-item"><span class="section-map-num">3</span><div><h4>Breakdowns</h4><p>Sources, forms, won deals, pipeline stages, and stage snapshots.</p></div></div>
+        <div class="section-map-item"><span class="section-map-num">4</span><div><h4>Funnel, Win Rate, Lead Origin &amp; Web Intent</h4><p>Where opportunities stand right now, and what leads are interested in.</p></div></div>
+        <div class="section-map-item"><span class="section-map-num">5</span><div><h4>Top Pages, Referrers &amp; Leads by State</h4><p>Where visitors and leads are coming from.</p></div></div>
+        <div class="section-map-item"><span class="section-map-num">6</span><div><h4>Daily AI Analysis</h4><p>A short daily written summary of what changed overnight.</p></div></div>
+        <div class="section-map-item"><span class="section-map-num">7</span><div><h4>Opportunity Velocity &amp; Paid Traffic</h4><p>How fast leads move from a form to a stage, plus Google and LinkedIn ad performance.</p></div></div>
         <div class="section-map-item"><span class="section-map-num">8</span><div><h4>RB2B — Website Visitor Identification</h4><p>Who's visiting your website, even before they fill out a form.</p></div></div>
       </div>
     </div>
@@ -180,47 +397,37 @@
     <div class="wrap">
       <div class="sec-label">03 · Widget reference</div>
       <h2>Every panel, in plain terms</h2>
-      <p class="sec-intro">Same order as the panels appear on the dashboard. A few panels are "right now" snapshots instead of date-range views — that's noted where it applies.</p>
+      <p class="sec-intro">Same order as the panels appear on the dashboard. A few panels are "right now" snapshots instead of date-range views — that's noted where it applies. A few are marked "coming soon" — the space is on the dashboard, but the numbers aren't wired up yet.</p>
 
       <div class="subsec">
         <h3>Opportunities Overview <span class="status-pill live">Live</span></h3>
-        <p class="subsec-note">Six key numbers for the selected time range. Click any of the first five to see the actual list behind it. A toggle lets you switch between all opportunities and just the ones we know came from marketing.</p>
+        <p class="subsec-note">Six key numbers for the selected time range. Click any of the first five to see the actual list behind it. A four-way toggle lets you narrow the view by pipeline group.</p>
         <table>
           <thead><tr><th>Tile</th><th>What it shows</th></tr></thead>
           <tbody>
             <tr><td><h4>Total Generated</h4></td><td>New opportunities created in the selected range</td></tr>
-            <tr><td><h4>Won</h4></td><td>Opportunities won in the range, plus your close rate</td></tr>
             <tr><td><h4>Open / Active</h4></td><td>Opportunities open right now, plus their total dollar value</td></tr>
-            <tr><td><h4>Lost / Abandoned</h4></td><td>Opportunities lost or abandoned in the range</td></tr>
-            <tr><td><h4>Won Revenue</h4></td><td>Total dollar value of everything won in the range</td></tr>
-            <tr><td><h4>Ad Spend · ROAS</h4></td><td>What you spent on ads, and what you got back for it. See the limitations section for how to read this one — it can look off over short time windows.</td></tr>
+            <tr><td><h4>Moved to Stale</h4></td><td>Opportunities that stalled out or were set aside in the range (formerly labeled "Lost / Abandoned")</td></tr>
+            <tr><td><h4>Success</h4></td><td>Opportunities that reached a won stage in the range, plus your close rate (formerly labeled "Won")</td></tr>
+            <tr><td><h4>Success Value</h4></td><td>Total dollar value of everything that reached success in the range (formerly "Won Revenue")</td></tr>
+            <tr><td><h4>Ad Spend · ROAS</h4></td><td>What you spent on ads, and what you got back for it — the return side now uses Success Value. See the limitations section for how to read this one; it can look off over short time windows.</td></tr>
           </tbody>
         </table>
-      </div>
-
-      <div class="subsec">
-        <h3>Opportunity Velocity <span class="status-pill live">Live</span></h3>
-        <p class="subsec-note">Answers "how fast do leads from a given form turn into pipeline progress?" Choose a form and a pipeline stage, and see how many leads got there — and how many days it typically took.</p>
-        <p class="subsec-note"><strong>Worth knowing:</strong> this only counts leads currently sitting in that stage today, not everyone who ever passed through it. GoHighLevel doesn't keep a full history of every stage a lead has moved through, only where it is now.</p>
+        <p class="subsec-note" style="margin-top:16px"><strong>The four-way toggle</strong> switches which pipelines the six numbers are counted from: <em>Prospecting Pipelines</em> (your core sales pipelines), <em>Service Pipeline</em> (ops / service work), <em>Marketing-only Pipelines</em> (nurture and reporting pipelines), and <em>All Opportunities</em> (the three above combined). It's a way to look at one slice of the business at a time, or all of it at once.</p>
       </div>
 
       <div class="subsec">
         <h3>Breakdowns <span class="status-pill live">Live</span></h3>
-        <p class="subsec-note">Four simple charts for the selected range — click any slice to see who's behind it.</p>
+        <p class="subsec-note">A set of charts for the selected range — click any slice or bar to see who's behind it.</p>
         <table>
           <thead><tr><th>Panel</th><th>What it shows</th></tr></thead>
           <tbody>
-            <tr><td><h4>Form Submissions</h4></td><td>How many people filled out each form</td></tr>
-            <tr><td><h4>Leads by State</h4></td><td>Where your leads are located, by state</td></tr>
             <tr><td><h4>Source Attribution</h4></td><td>Where leads say they came from</td></tr>
+            <tr><td><h4>Form Submissions</h4></td><td>How many people filled out each form</td></tr>
             <tr><td><h4>Won by Source</h4></td><td>Which sources actually turned into won deals, and their value</td></tr>
+            <tr><td><h4>Leads by State</h4></td><td>Where your leads are located, by state</td></tr>
           </tbody>
         </table>
-      </div>
-
-      <div class="subsec">
-        <h3>Win Rate Summary <span class="status-pill live">All-time</span></h3>
-        <p class="subsec-note">Your overall win rate, across everything — not tied to the date range picker above.</p>
       </div>
 
       <div class="subsec">
@@ -229,8 +436,23 @@
       </div>
 
       <div class="subsec">
+        <h3>Stage Snapshots <span class="status-pill live">Right now</span></h3>
+        <p class="subsec-note">Quick "where things stand today" counts for a few key stages, sitting alongside the stage breakdown — a fast read without scanning the whole chart.</p>
+      </div>
+
+      <div class="subsec">
         <h3>Lead Source Breakdown <span class="status-pill watch">Still being checked</span></h3>
-        <p class="subsec-note">Groups your open opportunities by how the lead originally came in — things like Sales Intel, Referral, Cold Call, or Event. This is a new panel, and we're still confirming the numbers look right before treating it as final.</p>
+        <p class="subsec-note">Groups your open opportunities by how the lead originally came in — things like Sales Intel, Referral, Cold Call, or Event. This is a newer panel, and we're still confirming the numbers look right before treating it as final.</p>
+      </div>
+
+      <div class="subsec">
+        <h3>Discovery Meeting Complete <span class="status-pill live">Live</span></h3>
+        <p class="subsec-note">How many opportunities have reached the "discovery meeting complete" point — a simple count of deals that have cleared that early milestone.</p>
+      </div>
+
+      <div class="subsec">
+        <h3>Upcoming panels <span class="status-pill soon">Coming soon</span></h3>
+        <p class="subsec-note">Three cards are placed on the dashboard but not yet wired to data — they show a "Coming Soon" state so the layout is ready when the numbers are. These are: <em>Referrals in Progress by Source</em>, <em>Presentation / Proposal Completed</em>, and <em>EPC Signed &amp; Deposit by Source</em>.</p>
       </div>
 
       <div class="subsec">
@@ -239,8 +461,29 @@
       </div>
 
       <div class="subsec">
+        <h3>Win Rate Summary <span class="status-pill live">All-time</span></h3>
+        <p class="subsec-note">Your overall win rate. It follows its own pipeline filter rather than the date range picker at the top, so it reads as a steady all-time figure.</p>
+      </div>
+
+      <div class="subsec">
+        <h3>Lead Origin <span class="status-pill live">Right now</span></h3>
+        <p class="subsec-note">Splits your open opportunities into marketing-generated leads versus seller-generated leads, based on how each one was tagged. It's a Sales-Ops view, so it stands on its own and isn't tied to the marketing-attributed toggle used elsewhere. Click a slice to see the contacts behind it.</p>
+      </div>
+
+      <div class="subsec">
+        <h3>Interest of Web Intent <span class="status-pill live">Right now</span></h3>
+        <p class="subsec-note">For leads showing web-intent signals, this shows what they're interested in — pulled from interest tags on contacts with open opportunities in the relevant stages. Shown as a simple horizontal bar chart.</p>
+      </div>
+
+      <div class="subsec">
         <h3>Daily AI Analysis <span class="status-pill live">Live</span></h3>
         <p class="subsec-note">A short written note, refreshed every morning, on what changed overnight and what it might mean.</p>
+      </div>
+
+      <div class="subsec">
+        <h3>Opportunity Velocity <span class="status-pill live">Live</span></h3>
+        <p class="subsec-note">Answers "how fast do leads from a given form turn into pipeline progress?" Choose a form and a pipeline stage, and see how many leads got there — and how many days it typically took. This panel keeps its own <em>all vs. marketing-attributed</em> toggle (see the note at the end of this section).</p>
+        <p class="subsec-note"><strong>Worth knowing:</strong> this only counts leads currently sitting in that stage today, not everyone who ever passed through it. GoHighLevel doesn't keep a full history of every stage a lead has moved through, only where it is now.</p>
       </div>
 
       <div class="subsec">
@@ -259,7 +502,7 @@
         <table>
           <thead><tr><th>Panel</th><th>What it shows</th></tr></thead>
           <tbody>
-            <tr><td><h4>Identification Types per Day</h4></td><td>New visitors, returning visitors, and companies identified each day. Click any point on the chart to see who they are.</td></tr>
+            <tr><td><h4>Identification Types per Day</h4></td><td>New visitors, returning visitors, and companies identified each day, as three lines. Click any point on the chart to see who they are.</td></tr>
             <tr><td><h4>Top Pages Visited</h4></td><td>Your most-visited pages, all-time</td></tr>
             <tr><td><h4>Top Referrers</h4></td><td>Where visitors are coming from before they land on your site, all-time</td></tr>
           </tbody>
@@ -268,7 +511,7 @@
 
       <div class="subsec">
         <h3 style="font-size:16px">A note on "Marketing-Attributed"</h3>
-        <p class="subsec-note">Some panels let you toggle between all opportunities and just the marketing-driven ones. That toggle counts a lead as "marketing" if they came from a form or an email sequence — not from an ad click or a general website visit, since those turned out to be too broad to count as real marketing credit.</p>
+        <p class="subsec-note">Opportunity Velocity lets you toggle between all opportunities and just the marketing-driven ones. That toggle counts a lead as "marketing" if they came from a form or an email sequence — not from an ad click or a general website visit, since those turned out to be too broad to count as real marketing credit. (The Opportunities Overview uses the four-way pipeline toggle described above instead, and Lead Origin has its own marketing-vs-seller split.)</p>
       </div>
 
     </div>
@@ -282,8 +525,9 @@
       <p class="sec-intro">None of these are bugs — just things worth knowing so a number is never misread.</p>
       <div class="limit-list">
         <div class="limit"><h4>Ad Spend · ROAS can look off over short time windows</h4><p>It compares spend and revenue within the same date range — but a deal that closes this week might've started weeks or months ago. Over a week this can look extreme; over 90 days or a year, it evens out and means more.</p></div>
-        <div class="limit"><h4>Some panels show "right now," not history</h4><p>Opportunity Velocity, Pipeline Stage Breakdown, and Lead Source Breakdown show where things stand today — not everyone who ever passed through a stage. GoHighLevel doesn't keep that fuller history.</p></div>
-        <div class="limit"><h4>Lead Source Breakdown is still being checked</h4><p>It's new, and early numbers show more "Other" than expected. We're confirming it against real records before treating it as final.</p></div>
+        <div class="limit"><h4>Some panels show "right now," not history</h4><p>Opportunity Velocity, Pipeline Stage Breakdown, Stage Snapshots, Lead Source Breakdown, Lead Origin, and Interest of Web Intent all show where things stand today — not everyone who ever passed through a stage. GoHighLevel doesn't keep that fuller history.</p></div>
+        <div class="limit"><h4>Lead Source Breakdown is still being checked</h4><p>It's newer, and early numbers show more "Other" than expected. We're confirming it against real records before treating it as final.</p></div>
+        <div class="limit"><h4>Three panels are coming soon</h4><p>Referrals in Progress, Presentation / Proposal Completed, and EPC Signed &amp; Deposit are placed on the dashboard but show a "Coming Soon" state — the layout is ready, the data isn't wired up yet.</p></div>
         <div class="limit"><h4>RB2B doesn't show ad campaigns yet</h4><p>RB2B's own dashboard can show which ad campaign brought a visitor in — this integration can't yet, since that detail isn't in the data it sends us.</p></div>
       </div>
     </div>
